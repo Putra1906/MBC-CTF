@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>🏁 MBC Laboratory</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div><span style="color: rgb(255, 61, 61);">MBC</span> Laboratory Recruitment 2025</div>
+      <div>
+        👤 {{ name }} |
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>🧠 Jawab Tantangan Berikut</h2>
+      <p>
+        📥 Unduh file pcap untuk dianalisis:
+        <a href="{{ url_for('static', filename='kitten.png') }}" download>
+          Klik di sini
+        </a>
+      </p>
+      <h3>🔢 Pilih soal untuk dijawab:</h3>
+      <ul>
+        {% for i in range(1, 11) %}
+        <li><a href="{{ url_for('question', number=i) }}">Soal {{ i }}</a></li>
+        {% endfor %}
+      </ul>
+      <br />
+      <a href="{{ url_for('leaderboard') }}" class="button-link"
+        >🏆 Lihat Leaderboard</a
+      >
+    </div>
+  </body>
+</html>

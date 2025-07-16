@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>📊 Hasil Submit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📊 Hasil Submit</h1>
+
+      <p>✅ Skor dari jawaban ini: <strong>{{ score }}</strong> / 100</p>
+      <p>💯 Skor total kamu saat ini: <strong>{{ total_score }}</strong></p>
+      <p>🏅 Posisi kamu di leaderboard: <strong>{{ rank }} dari {{ total_users }} peserta</strong></p>
+
+      <h3>📝 Detail Jawaban:</h3>
+      <table>
+        <tr>
+          <th>No</th>
+          <th>Jawaban</th>
+          <th>Status</th>
+        </tr>
+        {% for key, val in results.items() %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ request.form[key] }}</td>
+          <td>{{ val }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <br />
+      <a href="{{ url_for('flags') }}" class="button-link">⬅ Kembali ke Soal</a>
+      <a href="{{ url_for('leaderboard') }}" class="button-link">🏆 Lihat Leaderboard</a>
+    </div>
+  </body>
+</html>

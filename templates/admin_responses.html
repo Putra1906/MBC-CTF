@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🛠 Jawaban Peserta</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <div>🛠 Jawaban Peserta</div>
+    <div>
+      👤 {{ session['name'] }}
+      | <a href="{{ url_for('leaderboard') }}">🏆 Leaderboard</a>
+      | <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>🛠 Jawaban Flag Peserta</h2>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Username</th>
+        <th>Nama</th>
+        <th>Skor</th>
+        <th>Waktu Submit</th>
+        <th>Jawaban</th>
+      </tr>
+      {% for entry in responses %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ entry[0] }}</td>
+        <td>{{ entry[1] }}</td>
+        <td>{{ entry[2] }}</td>
+        <td>{{ entry[3] }}</td>
+        <td><pre>{{ entry[4] }}</pre></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>

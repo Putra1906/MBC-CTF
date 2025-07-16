@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🏆 Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <div>🏆 Leaderboard</div>
+    <div>
+      👤 {{ session['name'] }}
+      | <a href="{{ url_for('flags') }}">📘 Soal</a>
+      {% if session.get('role') == 'admin' %}
+        | <a href="{{ url_for('view_responses') }}">📋 Lihat Jawaban</a>
+        | <a href="{{ url_for('reset_leaderboard') }}" class="admin-link" onclick="return confirm('Yakin ingin mereset leaderboard?')">♻️ Reset</a>
+      {% endif %}
+      | <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>🏆 Papan Peringkat Peserta</h2>
+    <table>
+      <tr>
+        <th>Peringkat</th>
+        <th>Nama</th>
+        <th>Skor</th>
+        <th>Terakhir Submit</th>
+      </tr>
+      {% for row in data %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('flags') }}" class="button-link">← Kembali ke Soal</a>
+  </div>
+</body>
+</html>

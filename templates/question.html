@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Soal {{ number }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div>📘 Soal CTF</div>
+      <div>👤 {{ name }} | <a href="{{ url_for('logout') }}">Logout</a></div>
+    </header>
+
+    <div class="container">
+      <h2>Soal {{ number }}</h2>
+      <p><strong>Pertanyaan:</strong> {{ question_text }}</p>
+
+      {% if feedback %}
+      <p><strong>{{ feedback }}</strong></p>
+      {% endif %} {% if not correct %}
+      <form method="POST">
+        <input
+          type="text"
+          name="flag"
+          placeholder="{{ placeholder }}"
+          required
+        />
+        <input type="submit" value="Submit Jawaban" />
+      </form>
+      {% endif %}
+
+      <hr />
+      <p>📊 Skor kamu saat ini: <strong>{{ current_score }}</strong></p>
+      <p>📈 Peringkat kamu: <strong>{{ rank }}</strong></p>
+
+      <a href="{{ url_for('flags') }}" class="button-link"
+        >⬅️ Kembali ke Daftar Soal</a
+      >
+      <a href="{{ url_for('leaderboard') }}" class="button-link"
+        >🏆 Lihat Leaderboard</a
+      >
+    </div>
+  </body>
+</html>

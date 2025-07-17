@@ -1,29 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3, json, os
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'rahasia-super-aman'
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
 DB_NAME = 'leaderboard.db'
 
-USERS = {
-    'caas1': {'password': '123', 'name': 'CAAS 1', 'role': 'user'},
-    'caas2': {'password': '123', 'name': 'CAAS 2', 'role': 'user'},
-    'admin': {'password': 'capybarasolid2425', 'name': 'CAPYBARA ADMIN', 'role': 'admin'}
-}
-
-CORRECT_FLAGS = {
-    'flag1': '192.168.1.10',
-    'flag2': '5',
-    'flag3': 'nmap',
-    'flag4': '10.251.96.4',
-    'flag5': '192.168.1.15',
-    'flag6': 'root',
-    'flag7': '14:35',
-    'flag8': 'ya',
-    'flag9': 'backdoor.php',
-    'flag10': 'abc123def456ghi789xyz000'
-}
+# Load USERS and FLAGS securely
+USERS = json.loads(os.getenv('USERS_JSON'))
+CORRECT_FLAGS = json.loads(os.getenv('CORRECT_FLAGS_JSON'))
 
 def init_db():
     with sqlite3.connect(DB_NAME) as conn:
@@ -147,7 +136,6 @@ def question(number):
         name=session['name'],
         placeholder=placeholder
     )
-
 
 @app.route('/leaderboard')
 def leaderboard():

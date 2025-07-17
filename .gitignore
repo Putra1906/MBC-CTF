@@ -1,0 +1,16 @@
+# Abaikan virtual environment
+venv/
+
+# Abaikan file database SQLite
+leaderboard.db
+
+# Abaikan file pycache dan bytecode
+__pycache__/
+*.pyc
+
+# Abaikan file environment lokal
+.env
+
+# Abaikan file OS
+.DS_Store
+Thumbs.db
